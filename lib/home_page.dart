@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'generated/app_localizations.dart';
 import 'profile_page.dart';
 import 'teams_page.dart';
 
@@ -12,13 +13,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  static final List<Widget> _tabContents = <Widget>[
-    const HomeDashboard(),
-    const Center(child: Text('Shop coming soon', style: TextStyle(fontSize: 16))),
-    const TeamsPage(),
-    const Center(child: Text('Earnings details coming soon', style: TextStyle(fontSize: 16))),
-    const ProfilePage(),
-  ];
+  List<Widget> _buildTabContents(BuildContext context) => <Widget>[
+        const HomeDashboard(),
+        Center(child: Text(S.of(context)!.shopComingSoon, style: const TextStyle(fontSize: 16))),
+        const TeamsPage(),
+        Center(child: Text(S.of(context)!.earningsComingSoon, style: const TextStyle(fontSize: 16))),
+        const ProfilePage(),
+      ];
 
   void _onNavTap(int index) {
     setState(() {
@@ -31,17 +32,17 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F9FF),
       body: SafeArea(
-        child: _tabContents[_selectedIndex],
+        child: _buildTabContents(context)[_selectedIndex],
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onNavTap,
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.storefront_outlined), selectedIcon: Icon(Icons.storefront), label: 'Shop'),
-          NavigationDestination(icon: Icon(Icons.group_outlined), selectedIcon: Icon(Icons.group), label: 'Teams'),
-          NavigationDestination(icon: Icon(Icons.bar_chart_outlined), selectedIcon: Icon(Icons.bar_chart), label: 'Earnings'),
-          NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'Profile'),
+        destinations: [
+          NavigationDestination(icon: const Icon(Icons.home_outlined), selectedIcon: const Icon(Icons.home), label: S.of(context)!.home),
+          NavigationDestination(icon: const Icon(Icons.storefront_outlined), selectedIcon: const Icon(Icons.storefront), label: S.of(context)!.shop),
+          NavigationDestination(icon: const Icon(Icons.group_outlined), selectedIcon: const Icon(Icons.group), label: S.of(context)!.teams),
+          NavigationDestination(icon: const Icon(Icons.bar_chart_outlined), selectedIcon: const Icon(Icons.bar_chart), label: S.of(context)!.earnings),
+          NavigationDestination(icon: const Icon(Icons.person_outline), selectedIcon: const Icon(Icons.person), label: S.of(context)!.profile),
         ],
       ),
     );
@@ -116,6 +117,7 @@ class HomeDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = S.of(context)!;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 14),
@@ -129,9 +131,9 @@ class HomeDashboard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Hi, Shanmukhan 👋', style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                    Text(l10n.greeting('Shanmukhan'), style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 6),
-                    Text('Welcome back', style: theme.textTheme.bodyMedium?.copyWith(color: Colors.black54)),
+                    Text(l10n.welcomeBack, style: theme.textTheme.bodyMedium?.copyWith(color: Colors.black54)),
                   ],
                 ),
               ),
@@ -158,7 +160,7 @@ class HomeDashboard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Total Wallet Balance', style: TextStyle(color: Colors.white70, fontSize: 14)),
+                    Text(l10n.totalWalletBalance, style: const TextStyle(color: Colors.white70, fontSize: 14)),
                     FilledButton(
                       onPressed: () {},
                       style: FilledButton.styleFrom(
@@ -167,20 +169,20 @@ class HomeDashboard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                       ),
-                      child: const Text('Add Money', style: TextStyle(color: Colors.indigo)),
+                      child: Text(l10n.addMoney, style: const TextStyle(color: Colors.indigo)),
                     ),
                   ],
                 ),
                 const SizedBox(height: 18),
-                const Text('₹ 12,450.50', style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold)),
+                Text(l10n.walletBalance, style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 18),
                 Row(
                   children: [
-                    Expanded(child: _buildMiniStat('Total Earnings', '₹ 45,680')),
+                    Expanded(child: _buildMiniStat(l10n.totalEarnings, '₹ 45,680')),
                     const SizedBox(width: 12),
-                    Expanded(child: _buildMiniStat('This Month', '₹ 8,750')),
+                    Expanded(child: _buildMiniStat(l10n.thisMonth, '₹ 8,750')),
                     const SizedBox(width: 12),
-                    Expanded(child: _buildMiniStat('Pending Payout', '₹ 2,350')),
+                    Expanded(child: _buildMiniStat(l10n.pendingPayout, '₹ 2,350')),
                   ],
                 ),
               ],
@@ -189,17 +191,17 @@ class HomeDashboard extends StatelessWidget {
           const SizedBox(height: 22),
           Row(
             children: [
-              _buildInfoCard(icon: Icons.shopping_bag_outlined, title: 'My Orders', value: '12', color: Colors.blue),
+              _buildInfoCard(icon: Icons.shopping_bag_outlined, title: l10n.myOrders, value: '12', color: Colors.blue),
               const SizedBox(width: 12),
-              _buildInfoCard(icon: Icons.group_outlined, title: 'My Team', value: '8', color: Colors.purple),
+              _buildInfoCard(icon: Icons.group_outlined, title: l10n.myTeam, value: '8', color: Colors.purple),
             ],
           ),
           const SizedBox(height: 14),
           Row(
             children: [
-              _buildInfoCard(icon: Icons.account_balance_wallet_outlined, title: 'Wallet', value: '₹ 12,450', color: Colors.teal),
+              _buildInfoCard(icon: Icons.account_balance_wallet_outlined, title: l10n.walletLabel, value: '₹ 12,450', color: Colors.teal),
               const SizedBox(width: 12),
-              _buildInfoCard(icon: Icons.card_giftcard_outlined, title: 'Rewards', value: '33', color: Colors.orange),
+              _buildInfoCard(icon: Icons.card_giftcard_outlined, title: l10n.rewards, value: '33', color: Colors.orange),
             ],
           ),
           const SizedBox(height: 22),
@@ -220,10 +222,10 @@ class HomeDashboard extends StatelessWidget {
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text('Mega Offer', style: TextStyle(fontSize: 13, color: Colors.black54)),
+                      children: [
+                        Text(l10n.megaOffer, style: const TextStyle(fontSize: 13, color: Colors.black54)),
                         SizedBox(height: 6),
-                        Text('55" 4K LED TV', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        Text(l10n.offerProduct, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       ],
                     ),
                     Container(
@@ -237,7 +239,7 @@ class HomeDashboard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 16),
-                const Text('Starting at ₹ 29,999', style: TextStyle(fontSize: 12, color: Colors.black54)),
+                Text(l10n.offerStartingAt, style: const TextStyle(fontSize: 12, color: Colors.black54)),
                 const SizedBox(height: 18),
                 Row(
                   children: [
@@ -248,7 +250,7 @@ class HomeDashboard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         ),
-                        child: const Text('Shop Now'),
+                        child: Text(l10n.shopNow),
                       ),
                     ),
                   ],
@@ -260,24 +262,24 @@ class HomeDashboard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Top Categories', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
-              Text('View All', style: theme.textTheme.bodyMedium?.copyWith(color: Colors.indigo)),
+              Text(l10n.topCategories, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+              Text(l10n.viewAll, style: theme.textTheme.bodyMedium?.copyWith(color: Colors.indigo)),
             ],
           ),
           const SizedBox(height: 16),
           Row(
             children: [
-              _buildCategoryTile(icon: Icons.tv_outlined, label: 'Televisions'),
+              _buildCategoryTile(icon: Icons.tv_outlined, label: l10n.televisions),
               const SizedBox(width: 12),
-              _buildCategoryTile(icon: Icons.phone_iphone_outlined, label: 'Mobiles'),
+              _buildCategoryTile(icon: Icons.phone_iphone_outlined, label: l10n.mobiles),
             ],
           ),
           const SizedBox(height: 12),
           Row(
             children: [
-              _buildCategoryTile(icon: Icons.kitchen_outlined, label: 'Appliances'),
+              _buildCategoryTile(icon: Icons.kitchen_outlined, label: l10n.appliances),
               const SizedBox(width: 12),
-              _buildCategoryTile(icon: Icons.headphones_outlined, label: 'Accessories'),
+              _buildCategoryTile(icon: Icons.headphones_outlined, label: l10n.accessories),
             ],
           ),
           const SizedBox(height: 22),

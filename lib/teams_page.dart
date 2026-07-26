@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'generated/app_localizations.dart';
 
 class TeamsPage extends StatelessWidget {
   const TeamsPage({super.key});
@@ -66,6 +67,7 @@ class TeamsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = S.of(context)!;
     return Scaffold(
       backgroundColor: const Color(0xFFF7F9FF),
       body: SafeArea(
@@ -74,9 +76,9 @@ class TeamsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('My Team', style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+              Text(l10n.myTeamTitle, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
               const SizedBox(height: 6),
-              Text('Tree view of your referred users', style: theme.textTheme.bodyMedium?.copyWith(color: Colors.black54)),
+              Text(l10n.teamTreeSubtitle, style: theme.textTheme.bodyMedium?.copyWith(color: Colors.black54)),
               const SizedBox(height: 22),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
@@ -89,13 +91,13 @@ class TeamsPage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    _buildMemberCard(name: 'You', role: 'Current User', status: 'You', color: Colors.indigo),
+                    _buildMemberCard(name: l10n.currentUser, role: l10n.currentUser, status: l10n.currentUser, color: Colors.indigo),
                     const SizedBox(height: 18),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Column(
-                          children: const [
+                          children: [
                             CircleAvatar(radius: 6, backgroundColor: Colors.indigo),
                             SizedBox(height: 110),
                           ],
@@ -104,11 +106,11 @@ class TeamsPage extends StatelessWidget {
                         Expanded(
                           child: Column(
                             children: [
-                              _buildMemberCard(name: 'Amit Sharma', role: 'Level 1', status: 'Active', color: Colors.purple),
+                              _buildMemberCard(name: 'Amit Sharma', role: 'Level 1', status: l10n.active, color: Colors.purple),
                               _buildConnectionLine(isLast: false),
-                              _buildMemberCard(name: 'Neha Patel', role: 'Level 1', status: 'Active', color: Colors.teal),
+                              _buildMemberCard(name: 'Neha Patel', role: 'Level 1', status: l10n.active, color: Colors.teal),
                               _buildConnectionLine(isLast: false),
-                              _buildMemberCard(name: 'Vikram Reddy', role: 'Level 1', status: 'Active', color: Colors.orange),
+                              _buildMemberCard(name: 'Vikram Reddy', role: 'Level 1', status: l10n.active, color: Colors.orange),
                             ],
                           ),
                         ),
@@ -126,10 +128,10 @@ class TeamsPage extends StatelessWidget {
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text('Total Team', style: TextStyle(color: Colors.black54, fontSize: 12)),
-                                SizedBox(height: 10),
-                                Text('32', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                              children: [
+                                Text(l10n.totalTeam, style: const TextStyle(color: Colors.black54, fontSize: 12)),
+                                const SizedBox(height: 10),
+                                Text(l10n.teamSize, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                               ],
                             ),
                           ),
@@ -147,10 +149,10 @@ class TeamsPage extends StatelessWidget {
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text('Active Team', style: TextStyle(color: Colors.black54, fontSize: 12)),
-                                SizedBox(height: 10),
-                                Text('18', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                              children: [
+                                Text(l10n.activeTeam, style: const TextStyle(color: Colors.black54, fontSize: 12)),
+                                const SizedBox(height: 10),
+                                Text(l10n.activeTeamCount, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                               ],
                             ),
                           ),
@@ -170,10 +172,10 @@ class TeamsPage extends StatelessWidget {
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text('Business Volume', style: TextStyle(color: Colors.black54, fontSize: 12)),
-                          SizedBox(height: 10),
-                          Text('₹ 2,45,000', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                        children: [
+                          Text(l10n.businessVolume, style: const TextStyle(color: Colors.black54, fontSize: 12)),
+                          const SizedBox(height: 10),
+                          Text(l10n.businessVolumeValue, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ),

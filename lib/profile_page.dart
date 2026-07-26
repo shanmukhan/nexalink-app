@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'generated/app_localizations.dart';
+import 'login_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -50,6 +52,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = S.of(context)!;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7F9FF),
@@ -66,9 +69,9 @@ class ProfilePage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Profile', style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                        Text(l10n.profileTitle, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 6),
-                        Text('Manage your account details', style: theme.textTheme.bodyMedium?.copyWith(color: Colors.black54)),
+                        Text(l10n.profileSubtitle, style: theme.textTheme.bodyMedium?.copyWith(color: Colors.black54)),
                       ],
                     ),
                   ),
@@ -121,17 +124,22 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildOptionTile(icon: Icons.badge_outlined, title: 'Personal Information'),
-              _buildOptionTile(icon: Icons.verified_user_outlined, title: 'KYC Verification', subtitle: 'Verified'),
-              _buildOptionTile(icon: Icons.account_balance_outlined, title: 'Bank Details'),
-              _buildOptionTile(icon: Icons.lock_outline, title: 'Change Password'),
-              _buildOptionTile(icon: Icons.bookmark_border, title: 'Address Book'),
-              _buildOptionTile(icon: Icons.support_agent_outlined, title: 'Support & Help'),
+              _buildOptionTile(icon: Icons.badge_outlined, title: l10n.personalInformation),
+              _buildOptionTile(icon: Icons.verified_user_outlined, title: l10n.kycVerification, subtitle: l10n.verified),
+              _buildOptionTile(icon: Icons.account_balance_outlined, title: l10n.bankDetails),
+              _buildOptionTile(icon: Icons.lock_outline, title: l10n.changePassword),
+              _buildOptionTile(icon: Icons.bookmark_border, title: l10n.addressBook),
+              _buildOptionTile(icon: Icons.support_agent_outlined, title: l10n.supportHelp),
               const SizedBox(height: 20),
               Center(
                 child: TextButton(
-                  onPressed: () {},
-                  child: const Text('Logout', style: TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold)),
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (_) => const LoginPage()),
+                      (route) => false,
+                    );
+                  },
+                  child: Text(l10n.logout, style: const TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
