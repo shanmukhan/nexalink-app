@@ -127,11 +127,11 @@ abstract class S {
   /// **'Enter mobile number or email'**
   String get phoneOrEmailHint;
 
-  /// No description provided for @sendOtpButton.
+  /// No description provided for @loginButton.
   ///
   /// In en, this message translates to:
-  /// **'Send OTP'**
-  String get sendOtpButton;
+  /// **'Login'**
+  String get loginButton;
 
   /// No description provided for @loginOr.
   ///
@@ -156,6 +156,186 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Enter a valid Indian mobile number or email.'**
   String get invalidLoginInput;
+
+  /// No description provided for @sendOtpButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Send OTP'**
+  String get sendOtpButton;
+
+  /// No description provided for @otpSentSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 6-digit code sent to {identifier}'**
+  String otpSentSubtitle(String identifier);
+
+  /// No description provided for @otpHint.
+  ///
+  /// In en, this message translates to:
+  /// **'6-digit OTP'**
+  String get otpHint;
+
+  /// No description provided for @verifyOtpButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify & Continue'**
+  String get verifyOtpButton;
+
+  /// No description provided for @resendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend OTP'**
+  String get resendOtp;
+
+  /// No description provided for @changeNumberLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get changeNumberLabel;
+
+  /// No description provided for @otpRequestFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not send OTP. Please try again.'**
+  String get otpRequestFailed;
+
+  /// No description provided for @otpVerifyFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid or expired OTP.'**
+  String get otpVerifyFailed;
+
+  /// No description provided for @loadingProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading product…'**
+  String get loadingProduct;
+
+  /// No description provided for @productLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load product. Please try again.'**
+  String get productLoadFailed;
+
+  /// No description provided for @retryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retryLabel;
+
+  /// No description provided for @addAddressTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Delivery Address'**
+  String get addAddressTitle;
+
+  /// No description provided for @addressLine1Hint.
+  ///
+  /// In en, this message translates to:
+  /// **'House no., street'**
+  String get addressLine1Hint;
+
+  /// No description provided for @addressLine2Hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Landmark (optional)'**
+  String get addressLine2Hint;
+
+  /// No description provided for @cityHint.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get cityHint;
+
+  /// No description provided for @stateHint.
+  ///
+  /// In en, this message translates to:
+  /// **'State'**
+  String get stateHint;
+
+  /// No description provided for @postalCodeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Postal code'**
+  String get postalCodeHint;
+
+  /// No description provided for @saveAddressButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Address'**
+  String get saveAddressButton;
+
+  /// No description provided for @noAddressSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved address yet — add one to continue'**
+  String get noAddressSaved;
+
+  /// No description provided for @placingOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Placing your order…'**
+  String get placingOrder;
+
+  /// No description provided for @checkoutFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not place order. Please try again.'**
+  String get checkoutFailed;
+
+  /// No description provided for @genericErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get genericErrorMessage;
+
+  /// No description provided for @referralCodeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral code (optional)'**
+  String get referralCodeHint;
+
+  /// No description provided for @myReferralCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Your referral code'**
+  String get myReferralCode;
+
+  /// No description provided for @shareCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareCode;
+
+  /// No description provided for @referralCodeCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral code copied'**
+  String get referralCodeCopied;
+
+  /// No description provided for @referralsUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'{used}/{max} referrals used'**
+  String referralsUsed(int used, int max);
+
+  /// No description provided for @commissionEarned.
+  ///
+  /// In en, this message translates to:
+  /// **'Commission earned'**
+  String get commissionEarned;
+
+  /// No description provided for @noReferralsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No referrals yet — share your code to start earning'**
+  String get noReferralsYet;
+
+  /// No description provided for @walletFullyCoversOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Paying fully from wallet balance'**
+  String get walletFullyCoversOrder;
 
   /// No description provided for @home.
   ///
@@ -486,6 +666,360 @@ abstract class S {
   /// In en, this message translates to:
   /// **'9160151567'**
   String get phoneNumber;
+
+  /// No description provided for @productName.
+  ///
+  /// In en, this message translates to:
+  /// **'55\" 4K Ultra HD Smart LED TV'**
+  String get productName;
+
+  /// No description provided for @productRating.
+  ///
+  /// In en, this message translates to:
+  /// **'4.6 (2,340 ratings)'**
+  String get productRating;
+
+  /// No description provided for @specifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Specifications'**
+  String get specifications;
+
+  /// No description provided for @specScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'55\" 4K Ultra HD Display'**
+  String get specScreen;
+
+  /// No description provided for @specSound.
+  ///
+  /// In en, this message translates to:
+  /// **'Dolby Audio, 24W Speakers'**
+  String get specSound;
+
+  /// No description provided for @specConnectivity.
+  ///
+  /// In en, this message translates to:
+  /// **'3x HDMI, 2x USB, Wi-Fi'**
+  String get specConnectivity;
+
+  /// No description provided for @specOs.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart OS with built-in apps'**
+  String get specOs;
+
+  /// No description provided for @warrantyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Warranty'**
+  String get warrantyTitle;
+
+  /// No description provided for @warrantyText.
+  ///
+  /// In en, this message translates to:
+  /// **'1 year comprehensive warranty + 1 year additional on panel'**
+  String get warrantyText;
+
+  /// No description provided for @cashbackEligibility.
+  ///
+  /// In en, this message translates to:
+  /// **'Cashback Eligibility'**
+  String get cashbackEligibility;
+
+  /// No description provided for @cashbackText.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn 2% instant cashback to your Nexa wallet on this order'**
+  String get cashbackText;
+
+  /// No description provided for @referralPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral Policy'**
+  String get referralPolicy;
+
+  /// No description provided for @referralPolicyText.
+  ///
+  /// In en, this message translates to:
+  /// **'Refer a friend and earn ₹500 commission when they purchase this product'**
+  String get referralPolicyText;
+
+  /// No description provided for @similarProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Similar Products'**
+  String get similarProducts;
+
+  /// No description provided for @similarProductsComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'More products coming soon'**
+  String get similarProductsComingSoon;
+
+  /// No description provided for @addToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to Cart'**
+  String get addToCart;
+
+  /// No description provided for @buyNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy Now'**
+  String get buyNow;
+
+  /// No description provided for @cartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Cart'**
+  String get cartTitle;
+
+  /// No description provided for @cartEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart is empty'**
+  String get cartEmptyTitle;
+
+  /// No description provided for @cartEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add products to see them here'**
+  String get cartEmptySubtitle;
+
+  /// No description provided for @browseProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse Products'**
+  String get browseProducts;
+
+  /// No description provided for @quantityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantityLabel;
+
+  /// No description provided for @couponCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Coupon Code'**
+  String get couponCodeLabel;
+
+  /// No description provided for @couponCodeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter coupon code'**
+  String get couponCodeHint;
+
+  /// No description provided for @applyCoupon.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get applyCoupon;
+
+  /// No description provided for @couponApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'Coupon applied successfully'**
+  String get couponApplied;
+
+  /// No description provided for @invalidCoupon.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid coupon code'**
+  String get invalidCoupon;
+
+  /// No description provided for @useWalletBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Wallet Balance'**
+  String get useWalletBalance;
+
+  /// No description provided for @walletAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'₹ {amount} available'**
+  String walletAvailable(String amount);
+
+  /// No description provided for @orderSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Summary'**
+  String get orderSummary;
+
+  /// No description provided for @subtotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtotal'**
+  String get subtotal;
+
+  /// No description provided for @couponDiscountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Coupon Discount'**
+  String get couponDiscountLabel;
+
+  /// No description provided for @walletApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet Applied'**
+  String get walletApplied;
+
+  /// No description provided for @estimatedCashbackLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated Cashback'**
+  String get estimatedCashbackLabel;
+
+  /// No description provided for @totalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get totalLabel;
+
+  /// No description provided for @proceedToCheckout.
+  ///
+  /// In en, this message translates to:
+  /// **'Proceed to Checkout'**
+  String get proceedToCheckout;
+
+  /// No description provided for @checkoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout'**
+  String get checkoutTitle;
+
+  /// No description provided for @deliveryAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Address'**
+  String get deliveryAddress;
+
+  /// No description provided for @changeAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get changeAddress;
+
+  /// No description provided for @defaultAddressName.
+  ///
+  /// In en, this message translates to:
+  /// **'Shanmukhan'**
+  String get defaultAddressName;
+
+  /// No description provided for @defaultAddressLine.
+  ///
+  /// In en, this message translates to:
+  /// **'12-3-45, Green Valley Apartments, Madhapur, Hyderabad, Telangana - 500081'**
+  String get defaultAddressLine;
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Method'**
+  String get paymentMethod;
+
+  /// No description provided for @paymentUpi.
+  ///
+  /// In en, this message translates to:
+  /// **'UPI'**
+  String get paymentUpi;
+
+  /// No description provided for @paymentCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Debit / Credit Card'**
+  String get paymentCard;
+
+  /// No description provided for @paymentCod.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash on Delivery'**
+  String get paymentCod;
+
+  /// No description provided for @gstInvoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Need GST Invoice'**
+  String get gstInvoice;
+
+  /// No description provided for @gstinLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'GSTIN'**
+  String get gstinLabel;
+
+  /// No description provided for @gstinHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your GSTIN'**
+  String get gstinHint;
+
+  /// No description provided for @placeOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Place Order'**
+  String get placeOrder;
+
+  /// No description provided for @orderPlacedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Placed!'**
+  String get orderPlacedTitle;
+
+  /// No description provided for @orderPlacedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order has been placed successfully'**
+  String get orderPlacedSubtitle;
+
+  /// No description provided for @orderIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Order ID: {id}'**
+  String orderIdLabel(String id);
+
+  /// No description provided for @statusPlaced.
+  ///
+  /// In en, this message translates to:
+  /// **'Placed'**
+  String get statusPlaced;
+
+  /// No description provided for @statusPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get statusPaid;
+
+  /// No description provided for @statusPacked.
+  ///
+  /// In en, this message translates to:
+  /// **'Packed'**
+  String get statusPacked;
+
+  /// No description provided for @statusShipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipped'**
+  String get statusShipped;
+
+  /// No description provided for @statusDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get statusDelivered;
+
+  /// No description provided for @continueShopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Shopping'**
+  String get continueShopping;
+
+  /// No description provided for @backToHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Home'**
+  String get backToHome;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

@@ -5,11 +5,58 @@
   "loginSubtitle": "మీ వాలెట్, రివార్డ్స్ మరియు రిఫరల్స్ తో కొనసాగించడానికి లాగిన్ చేయండి.",
   "phoneOrEmailLabel": "ఫోన్ లేదా ఇమెయిల్",
   "phoneOrEmailHint": "మొబైల్ నంబర్ లేదా ఇమెయిల్ నమోదు చేయండి",
-  "sendOtpButton": "OTP పంపండి",
+  "loginButton": "లాగిన్",
   "loginOr": "లేదా",
   "biometricLabel": "బయోమెట్రిక్ లాగిన్ ఉపయోగించండి",
   "biometricDescription": "సురక్షిత OTP కోసం మీ నమోదు చేయబడిన మొబైల్ నంబర్ లేదా ఇమెయిల్ ఉపయోగించండి.",
-  "invalidLoginInput": "సరైన بھارتی మొబైల్ నంబర్ లేదా ఇమెయిల్ నమోదు చేయండి.",
+  "invalidLoginInput": "సరైన భారతీయ మొబైల్ నంబర్ లేదా ఇమెయిల్ నమోదు చేయండి.",
+  "sendOtpButton": "OTP పంపండి",
+  "otpSentSubtitle": "{identifier}కి పంపిన 6-అంకెల కోడ్‌ను నమోదు చేయండి",
+  "@otpSentSubtitle": {
+    "placeholders": {
+      "identifier": {
+        "type": "String"
+      }
+    }
+  },
+  "otpHint": "6-అంకెల OTP",
+  "verifyOtpButton": "ధృవీకరించి కొనసాగించండి",
+  "resendOtp": "OTP మళ్లీ పంపండి",
+  "changeNumberLabel": "మార్చు",
+  "otpRequestFailed": "OTP పంపడం సాధ్యం కాలేదు. మళ్లీ ప్రయత్నించండి.",
+  "otpVerifyFailed": "చెల్లని లేదా గడువు ముగిసిన OTP.",
+  "loadingProduct": "ఉత్పత్తి లోడ్ అవుతోంది…",
+  "productLoadFailed": "ఉత్పత్తిని లోడ్ చేయలేకపోయాము. మళ్లీ ప్రయత్నించండి.",
+  "retryLabel": "మళ్లీ ప్రయత్నించు",
+  "addAddressTitle": "డెలివరీ చిరునామా జోడించండి",
+  "addressLine1Hint": "ఇంటి నంబర్, వీధి",
+  "addressLine2Hint": "ల్యాండ్‌మార్క్ (ఐచ్ఛికం)",
+  "cityHint": "నగరం",
+  "stateHint": "రాష్ట్రం",
+  "postalCodeHint": "పోస్టల్ కోడ్",
+  "saveAddressButton": "చిరునామా సేవ్ చేయండి",
+  "noAddressSaved": "ఇంకా చిరునామా సేవ్ చేయలేదు — కొనసాగించడానికి ఒకటి జోడించండి",
+  "placingOrder": "మీ ఆర్డర్ చేయబడుతోంది…",
+  "checkoutFailed": "ఆర్డర్ చేయడం సాధ్యం కాలేదు. మళ్లీ ప్రయత్నించండి.",
+  "genericErrorMessage": "ఏదో తప్పు జరిగింది. మళ్లీ ప్రయత్నించండి.",
+  "referralCodeHint": "రిఫరల్ కోడ్ (ఐచ్ఛికం)",
+  "myReferralCode": "మీ రిఫరల్ కోడ్",
+  "shareCode": "షేర్ చేయండి",
+  "referralCodeCopied": "రిఫరల్ కోడ్ కాపీ చేయబడింది",
+  "referralsUsed": "{used}/{max} రిఫరల్స్ ఉపయోగించబడ్డాయి",
+  "@referralsUsed": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "commissionEarned": "సంపాదించిన కమిషన్",
+  "noReferralsYet": "ఇంకా రిఫరల్స్ లేవు — సంపాదించడం ప్రారంభించడానికి మీ కోడ్‌ను షేర్ చేయండి",
+  "walletFullyCoversOrder": "వాలెట్ బ్యాలెన్స్ నుండి పూర్తిగా చెల్లిస్తున్నారు",
   "home": "హోమ్",
   "shop": "షాప్",
   "teams": "టీమ్స్",
@@ -64,5 +111,78 @@
   "businessVolumeValue": "₹ 2,45,000",
   "nameShanmukhan": "శన్ముఖన్",
   "emailAddress": "shanmukhan.b@gmail.com",
-  "phoneNumber": "9160151567"
+  "phoneNumber": "9160151567",
+  "productName": "55\" 4K అల్ట్రా HD స్మార్ట్ LED TV",
+  "productRating": "4.6 (2,340 రేటింగ్‌లు)",
+  "specifications": "స్పెసిఫికేషన్లు",
+  "specScreen": "55\" 4K అల్ట్రా HD డిస్‌ప్లే",
+  "specSound": "డాల్బీ ఆడియో, 24W స్పీకర్లు",
+  "specConnectivity": "3x HDMI, 2x USB, Wi-Fi",
+  "specOs": "బిల్ట్-ఇన్ యాప్‌లతో స్మార్ట్ OS",
+  "warrantyTitle": "వారంటీ",
+  "warrantyText": "1 సంవత్సరం సమగ్ర వారంటీ + ప్యానెల్‌పై అదనంగా 1 సంవత్సరం",
+  "cashbackEligibility": "క్యాష్‌బ్యాక్ అర్హత",
+  "cashbackText": "ఈ ఆర్డర్‌పై మీ నెక్సా వాలెట్‌కు 2% తక్షణ క్యాష్‌బ్యాక్ పొందండి",
+  "referralPolicy": "రిఫరల్ పాలసీ",
+  "referralPolicyText": "స్నేహితుడిని రిఫర్ చేయండి, వారు ఈ ఉత్పత్తిని కొనుగోలు చేసినప్పుడు ₹500 కమిషన్ పొందండి",
+  "similarProducts": "సారూప్య ఉత్పత్తులు",
+  "similarProductsComingSoon": "మరిన్ని ఉత్పత్తులు త్వరలో వస్తాయి",
+  "addToCart": "కార్ట్‌కు జోడించు",
+  "buyNow": "ఇప్పుడే కొనండి",
+  "cartTitle": "నా కార్ట్",
+  "cartEmptyTitle": "మీ కార్ట్ ఖాళీగా ఉంది",
+  "cartEmptySubtitle": "ఉత్పత్తులను ఇక్కడ చూడటానికి జోడించండి",
+  "browseProducts": "ఉత్పత్తులను చూడండి",
+  "quantityLabel": "పరిమాణం",
+  "couponCodeLabel": "కూపన్ కోడ్",
+  "couponCodeHint": "కూపన్ కోడ్ నమోదు చేయండి",
+  "applyCoupon": "వర్తింపజేయి",
+  "couponApplied": "కూపన్ విజయవంతంగా వర్తింపజేయబడింది",
+  "invalidCoupon": "చెల్లని కూపన్ కోడ్",
+  "useWalletBalance": "వాలెట్ బ్యాలెన్స్ ఉపయోగించండి",
+  "walletAvailable": "₹ {amount} అందుబాటులో ఉంది",
+  "@walletAvailable": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "orderSummary": "ఆర్డర్ సారాంశం",
+  "subtotal": "ఉప మొత్తం",
+  "couponDiscountLabel": "కూపన్ డిస్కౌంట్",
+  "walletApplied": "వాలెట్ వర్తింపజేయబడింది",
+  "estimatedCashbackLabel": "అంచనా క్యాష్‌బ్యాక్",
+  "totalLabel": "మొత్తం",
+  "proceedToCheckout": "చెక్అవుట్‌కు కొనసాగండి",
+  "checkoutTitle": "చెక్అవుట్",
+  "deliveryAddress": "డెలివరీ చిరునామా",
+  "changeAddress": "మార్చు",
+  "defaultAddressName": "శన్ముఖన్",
+  "defaultAddressLine": "12-3-45, గ్రీన్ వ్యాలీ అపార్ట్‌మెంట్స్, మాదాపూర్, హైదరాబాద్, తెలంగాణ - 500081",
+  "paymentMethod": "చెల్లింపు విధానం",
+  "paymentUpi": "UPI",
+  "paymentCard": "డెబిట్ / క్రెడిట్ కార్డ్",
+  "paymentCod": "డెలివరీ సమయంలో నగదు",
+  "gstInvoice": "GST ఇన్‌వాయిస్ కావాలి",
+  "gstinLabel": "GSTIN",
+  "gstinHint": "మీ GSTIN నమోదు చేయండి",
+  "placeOrder": "ఆర్డర్ చేయండి",
+  "orderPlacedTitle": "ఆర్డర్ చేయబడింది!",
+  "orderPlacedSubtitle": "మీ ఆర్డర్ విజయవంతంగా చేయబడింది",
+  "orderIdLabel": "ఆర్డర్ ID: {id}",
+  "@orderIdLabel": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "statusPlaced": "ప్లేస్ చేయబడింది",
+  "statusPaid": "చెల్లించారు",
+  "statusPacked": "ప్యాక్ చేయబడింది",
+  "statusShipped": "పంపబడింది",
+  "statusDelivered": "డెలివరీ చేయబడింది",
+  "continueShopping": "షాపింగ్ కొనసాగించండి",
+  "backToHome": "హోమ్‌కు తిరిగి వెళ్లండి"
 }

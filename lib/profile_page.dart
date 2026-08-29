@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'auth_service.dart';
 import 'generated/app_localizations.dart';
 import 'login_page.dart';
 
@@ -133,7 +134,9 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 20),
               Center(
                 child: TextButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    await AuthService().logout();
+                    if (!context.mounted) return;
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (_) => const LoginPage()),
                       (route) => false,

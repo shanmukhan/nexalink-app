@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'api_models.dart';
+import 'cart_manager.dart';
 import 'generated/app_localizations.dart';
+import 'order_service.dart';
+import 'product_page.dart';
 import 'profile_page.dart';
+import 'referral_service.dart';
 import 'teams_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _buildTabContents(BuildContext context) => <Widget>[
         const HomeDashboard(),
-        Center(child: Text(S.of(context)!.shopComingSoon, style: const TextStyle(fontSize: 16))),
+        const ProductPage(),
         const TeamsPage(),
         Center(child: Text(S.of(context)!.earningsComingSoon, style: const TextStyle(fontSize: 16))),
         const ProfilePage(),
@@ -49,8 +54,38 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class HomeDashboard extends StatelessWidget {
+class HomeDashboard extends StatefulWidget {
   const HomeDashboard({super.key});
+
+  @override
+  State<HomeDashboard> createState() => _HomeDashboardState();
+}
+
+class _HomeDashboardState extends State<HomeDashboard> {
+  final _orderService = OrderService();
+  final _referralService = ReferralService();
+  int? _orderCount;
+  int? _teamCount;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadStats();
+  }
+
+  Future<void> _loadStats() async {
+    try {
+      final orderCount = await _orderService.countOrders();
+      final ReferralSummary summary = await _referralService.getMySummary();
+      if (!mounted) return;
+      setState(() {
+        _orderCount = orderCount;
+        _teamCount = summary.referredCount;
+      });
+    } catch (_) {
+      // best-effort dashboard stats; leave placeholders on failure
+    }
+  }
 
   Widget _buildInfoCard({required IconData icon, required String title, required String value, Color? color}) {
     return Expanded(
@@ -118,6 +153,9 @@ class HomeDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = S.of(context)!;
+    final walletBalance = CartProvider.of(context).walletBalance;
+    final orderCountLabel = _orderCount?.toString() ?? '—';
+    final teamCountLabel = _teamCount?.toString() ?? '—';
 
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 14),
@@ -174,7 +212,7 @@ class HomeDashboard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 18),
-                Text(l10n.walletBalance, style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold)),
+                Text('₹ ${walletBalance.toStringAsFixed(2)}', style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 18),
                 Row(
                   children: [
@@ -191,15 +229,15 @@ class HomeDashboard extends StatelessWidget {
           const SizedBox(height: 22),
           Row(
             children: [
-              _buildInfoCard(icon: Icons.shopping_bag_outlined, title: l10n.myOrders, value: '12', color: Colors.blue),
+              _buildInfoCard(icon: Icons.shopping_bag_outlined, title: l10n.myOrders, value: orderCountLabel, color: Colors.blue),
               const SizedBox(width: 12),
-              _buildInfoCard(icon: Icons.group_outlined, title: l10n.myTeam, value: '8', color: Colors.purple),
+              _buildInfoCard(icon: Icons.group_outlined, title: l10n.myTeam, value: teamCountLabel, color: Colors.purple),
             ],
           ),
           const SizedBox(height: 14),
           Row(
             children: [
-              _buildInfoCard(icon: Icons.account_balance_wallet_outlined, title: l10n.walletLabel, value: '₹ 12,450', color: Colors.teal),
+              _buildInfoCard(icon: Icons.account_balance_wallet_outlined, title: l10n.walletLabel, value: '₹ ${walletBalance.toStringAsFixed(2)}', color: Colors.teal),
               const SizedBox(width: 12),
               _buildInfoCard(icon: Icons.card_giftcard_outlined, title: l10n.rewards, value: '33', color: Colors.orange),
             ],
@@ -245,7 +283,7 @@ class HomeDashboard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: FilledButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ProductPage())),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

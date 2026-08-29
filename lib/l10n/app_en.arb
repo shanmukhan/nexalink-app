@@ -5,11 +5,58 @@
   "loginSubtitle": "Login to continue with your wallet, rewards, and referrals.",
   "phoneOrEmailLabel": "Phone or email",
   "phoneOrEmailHint": "Enter mobile number or email",
-  "sendOtpButton": "Send OTP",
+  "loginButton": "Login",
   "loginOr": "or",
   "biometricLabel": "Use biometric login",
   "biometricDescription": "Use your registered mobile number or email to get a secure OTP instantly.",
   "invalidLoginInput": "Enter a valid Indian mobile number or email.",
+  "sendOtpButton": "Send OTP",
+  "otpSentSubtitle": "Enter the 6-digit code sent to {identifier}",
+  "@otpSentSubtitle": {
+    "placeholders": {
+      "identifier": {
+        "type": "String"
+      }
+    }
+  },
+  "otpHint": "6-digit OTP",
+  "verifyOtpButton": "Verify & Continue",
+  "resendOtp": "Resend OTP",
+  "changeNumberLabel": "Change",
+  "otpRequestFailed": "Could not send OTP. Please try again.",
+  "otpVerifyFailed": "Invalid or expired OTP.",
+  "loadingProduct": "Loading product…",
+  "productLoadFailed": "Could not load product. Please try again.",
+  "retryLabel": "Retry",
+  "addAddressTitle": "Add Delivery Address",
+  "addressLine1Hint": "House no., street",
+  "addressLine2Hint": "Landmark (optional)",
+  "cityHint": "City",
+  "stateHint": "State",
+  "postalCodeHint": "Postal code",
+  "saveAddressButton": "Save Address",
+  "noAddressSaved": "No saved address yet — add one to continue",
+  "placingOrder": "Placing your order…",
+  "checkoutFailed": "Could not place order. Please try again.",
+  "genericErrorMessage": "Something went wrong. Please try again.",
+  "referralCodeHint": "Referral code (optional)",
+  "myReferralCode": "Your referral code",
+  "shareCode": "Share",
+  "referralCodeCopied": "Referral code copied",
+  "referralsUsed": "{used}/{max} referrals used",
+  "@referralsUsed": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "commissionEarned": "Commission earned",
+  "noReferralsYet": "No referrals yet — share your code to start earning",
+  "walletFullyCoversOrder": "Paying fully from wallet balance",
   "home": "Home",
   "shop": "Shop",
   "teams": "Teams",
@@ -64,5 +111,78 @@
   "businessVolumeValue": "₹ 2,45,000",
   "nameShanmukhan": "Shanmukhan",
   "emailAddress": "shanmukhan.b@gmail.com",
-  "phoneNumber": "9160151567"
+  "phoneNumber": "9160151567",
+  "productName": "55\" 4K Ultra HD Smart LED TV",
+  "productRating": "4.6 (2,340 ratings)",
+  "specifications": "Specifications",
+  "specScreen": "55\" 4K Ultra HD Display",
+  "specSound": "Dolby Audio, 24W Speakers",
+  "specConnectivity": "3x HDMI, 2x USB, Wi-Fi",
+  "specOs": "Smart OS with built-in apps",
+  "warrantyTitle": "Warranty",
+  "warrantyText": "1 year comprehensive warranty + 1 year additional on panel",
+  "cashbackEligibility": "Cashback Eligibility",
+  "cashbackText": "Earn 2% instant cashback to your Nexa wallet on this order",
+  "referralPolicy": "Referral Policy",
+  "referralPolicyText": "Refer a friend and earn ₹500 commission when they purchase this product",
+  "similarProducts": "Similar Products",
+  "similarProductsComingSoon": "More products coming soon",
+  "addToCart": "Add to Cart",
+  "buyNow": "Buy Now",
+  "cartTitle": "My Cart",
+  "cartEmptyTitle": "Your cart is empty",
+  "cartEmptySubtitle": "Add products to see them here",
+  "browseProducts": "Browse Products",
+  "quantityLabel": "Quantity",
+  "couponCodeLabel": "Coupon Code",
+  "couponCodeHint": "Enter coupon code",
+  "applyCoupon": "Apply",
+  "couponApplied": "Coupon applied successfully",
+  "invalidCoupon": "Invalid coupon code",
+  "useWalletBalance": "Use Wallet Balance",
+  "walletAvailable": "₹ {amount} available",
+  "@walletAvailable": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "orderSummary": "Order Summary",
+  "subtotal": "Subtotal",
+  "couponDiscountLabel": "Coupon Discount",
+  "walletApplied": "Wallet Applied",
+  "estimatedCashbackLabel": "Estimated Cashback",
+  "totalLabel": "Total",
+  "proceedToCheckout": "Proceed to Checkout",
+  "checkoutTitle": "Checkout",
+  "deliveryAddress": "Delivery Address",
+  "changeAddress": "Change",
+  "defaultAddressName": "Shanmukhan",
+  "defaultAddressLine": "12-3-45, Green Valley Apartments, Madhapur, Hyderabad, Telangana - 500081",
+  "paymentMethod": "Payment Method",
+  "paymentUpi": "UPI",
+  "paymentCard": "Debit / Credit Card",
+  "paymentCod": "Cash on Delivery",
+  "gstInvoice": "Need GST Invoice",
+  "gstinLabel": "GSTIN",
+  "gstinHint": "Enter your GSTIN",
+  "placeOrder": "Place Order",
+  "orderPlacedTitle": "Order Placed!",
+  "orderPlacedSubtitle": "Your order has been placed successfully",
+  "orderIdLabel": "Order ID: {id}",
+  "@orderIdLabel": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "statusPlaced": "Placed",
+  "statusPaid": "Paid",
+  "statusPacked": "Packed",
+  "statusShipped": "Shipped",
+  "statusDelivered": "Delivered",
+  "continueShopping": "Continue Shopping",
+  "backToHome": "Back to Home"
 }
