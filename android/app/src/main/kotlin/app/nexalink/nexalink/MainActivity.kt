@@ -1,4 +1,4 @@
-package com.nexalink.nexa_link
+package app.nexalink.nexalink
 
 import io.flutter.embedding.android.FlutterActivity
 

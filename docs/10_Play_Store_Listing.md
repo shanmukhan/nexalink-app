@@ -1,6 +1,8 @@
 # Google Play Store Listing
 
-Onboarding details for publishing the customer app to the Google Play Console.
+Onboarding details for publishing the customer app to the Google Play Console. See
+[08_Development_Guidelines.md](08_Development_Guidelines.md#release-builds-google-play) for how to build and
+sign the release artifact, and the version-bump convention to follow when preparing a new release.
 
 ## App name
 
@@ -10,7 +12,7 @@ Onboarding details for publishing the customer app to the Google Play Console.
 
 ## Package name (applicationId)
 
-**`com.nexalink.nexa_link`**
+**`app.nexalink.nexalink`**
 
 Defined in [android/app/build.gradle.kts](../android/app/build.gradle.kts) (`namespace` and `defaultConfig.applicationId`). This is the unique identifier submitted to Play Console and cannot be changed after the first release.
 

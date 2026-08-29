@@ -147,33 +147,44 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       if (!_otpSent) ...[
                         const SizedBox(height: 18),
-                        Wrap(
-                          alignment: WrapAlignment.center,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          spacing: 8,
-                          runSpacing: 8,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               '${l10n.languageLabel}:',
                               style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
                             ),
-                            OutlinedButton(
-                              onPressed: () => localeNotifier.setLocale(const Locale('en')),
-                              style: OutlinedButton.styleFrom(
-                                backgroundColor: isEnglish ? theme.colorScheme.primary : null,
-                                foregroundColor: isEnglish ? theme.colorScheme.onPrimary : null,
-                                side: BorderSide(color: theme.colorScheme.primary),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: OutlinedButton(
+                                onPressed: () => localeNotifier.setLocale(const Locale('en')),
+                                style: OutlinedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                  minimumSize: Size.zero,
+                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  visualDensity: VisualDensity.compact,
+                                  backgroundColor: isEnglish ? theme.colorScheme.primary : null,
+                                  foregroundColor: isEnglish ? theme.colorScheme.onPrimary : null,
+                                  side: BorderSide(color: theme.colorScheme.primary),
+                                ),
+                                child: FittedBox(child: Text(l10n.english)),
                               ),
-                              child: Text(l10n.english),
                             ),
-                            OutlinedButton(
-                              onPressed: () => localeNotifier.setLocale(const Locale('te')),
-                              style: OutlinedButton.styleFrom(
-                                backgroundColor: !isEnglish ? theme.colorScheme.primary : null,
-                                foregroundColor: !isEnglish ? theme.colorScheme.onPrimary : null,
-                                side: BorderSide(color: theme.colorScheme.primary),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: OutlinedButton(
+                                onPressed: () => localeNotifier.setLocale(const Locale('te')),
+                                style: OutlinedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                  minimumSize: Size.zero,
+                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  visualDensity: VisualDensity.compact,
+                                  backgroundColor: !isEnglish ? theme.colorScheme.primary : null,
+                                  foregroundColor: !isEnglish ? theme.colorScheme.onPrimary : null,
+                                  side: BorderSide(color: theme.colorScheme.primary),
+                                ),
+                                child: FittedBox(child: Text(l10n.telugu)),
                               ),
-                              child: Text(l10n.telugu),
                             ),
                           ],
                         ),
