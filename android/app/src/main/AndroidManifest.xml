@@ -1,4 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Debug/profile builds get this for free from android/app/src/debug/AndroidManifest.xml
+         (added there by the Flutter template, for hot reload/breakpoints) — but that
+         debug-only manifest never merges into a release build, so it has to be declared
+         here too, or every network call in a release APK/AAB fails at the OS level
+         (surfaces as SocketException: Failed host lookup, easy to mistake for a DNS/server
+         problem). -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="Nexa Link"
         android:name="${applicationName}"

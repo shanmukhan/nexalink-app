@@ -40,6 +40,7 @@
   "checkoutFailed": "Could not place order. Please try again.",
   "genericErrorMessage": "Something went wrong. Please try again.",
   "referralCodeHint": "Referral code (optional)",
+  "haveReferralCode": "Have a referral code?",
   "myReferralCode": "Your referral code",
   "shareCode": "Share",
   "referralCodeCopied": "Referral code copied",

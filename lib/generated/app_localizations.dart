@@ -295,6 +295,12 @@ abstract class S {
   /// **'Referral code (optional)'**
   String get referralCodeHint;
 
+  /// No description provided for @haveReferralCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a referral code?'**
+  String get haveReferralCode;
+
   /// No description provided for @myReferralCode.
   ///
   /// In en, this message translates to:

@@ -40,6 +40,7 @@
   "checkoutFailed": "ఆర్డర్ చేయడం సాధ్యం కాలేదు. మళ్లీ ప్రయత్నించండి.",
   "genericErrorMessage": "ఏదో తప్పు జరిగింది. మళ్లీ ప్రయత్నించండి.",
   "referralCodeHint": "రిఫరల్ కోడ్ (ఐచ్ఛికం)",
+  "haveReferralCode": "మీ వద్ద రిఫరల్ కోడ్ ఉందా?",
   "myReferralCode": "మీ రిఫరల్ కోడ్",
   "shareCode": "షేర్ చేయండి",
   "referralCodeCopied": "రిఫరల్ కోడ్ కాపీ చేయబడింది",

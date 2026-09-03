@@ -113,6 +113,9 @@ class SEn extends S {
   String get referralCodeHint => 'Referral code (optional)';
 
   @override
+  String get haveReferralCode => 'Have a referral code?';
+
+  @override
   String get myReferralCode => 'Your referral code';
 
   @override

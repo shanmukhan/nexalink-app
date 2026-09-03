@@ -28,20 +28,37 @@ class _LoginPageState extends State<LoginPage> {
   final _authService = AuthService();
 
   bool _isSubmitting = false;
+  bool _showReferralField = false;
   String? _errorMessage;
+
+  static final _phonePattern = RegExp(r'^[6-9]\d{9}$');
+  static final _emailPattern = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
 
   bool get _isValidIdentifier {
     final value = _identifierController.text.trim();
-    final phonePattern = RegExp(r'^[6-9]\d{9}$');
-    final emailPattern = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-    return phonePattern.hasMatch(value) || emailPattern.hasMatch(value);
+    return _phonePattern.hasMatch(value) || _emailPattern.hasMatch(value);
+  }
+
+  // Numeric keypad while the input still looks like the start of a phone
+  // number (digits only, or empty — phone is the more common path), an
+  // email-friendly keyboard (with "@") once it clearly isn't.
+  TextInputType get _keyboardType {
+    final value = _identifierController.text.trim();
+    final looksLikePhoneSoFar = RegExp(r'^\d*$').hasMatch(value);
+    return looksLikePhoneSoFar ? TextInputType.phone : TextInputType.emailAddress;
+  }
+
+  IconData get _identifierIcon {
+    final value = _identifierController.text.trim();
+    if (value.isEmpty) return Icons.person_outline;
+    if (_phonePattern.hasMatch(value)) return Icons.phone_android_outlined;
+    if (value.contains('@')) return Icons.email_outlined;
+    return Icons.person_outline;
   }
 
   Future<void> _onSendOtp() async {
     if (!_isValidIdentifier) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(S.of(context)!.invalidLoginInput)));
+      setState(() => _errorMessage = S.of(context)!.invalidLoginInput);
       return;
     }
     setState(() {
@@ -63,6 +80,12 @@ class _LoginPageState extends State<LoginPage> {
     } on ApiException catch (_) {
       if (!mounted) return;
       setState(() => _errorMessage = S.of(context)!.otpRequestFailed);
+    } catch (_) {
+      // Anything else (no network, DNS/host lookup failure, timeout, …) —
+      // still surface *something* rather than leaving the button just stop
+      // spinning with no explanation.
+      if (!mounted) return;
+      setState(() => _errorMessage = S.of(context)!.genericErrorMessage);
     } finally {
       if (mounted) setState(() => _isSubmitting = false);
     }
@@ -116,7 +139,17 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 12),
+                      Text(
+                        l10n.appTitle,
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.primary,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
                       Text(
                         l10n.loginTitle,
                         textAlign: TextAlign.center,
@@ -206,28 +239,74 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 10),
                       TextField(
                         controller: _identifierController,
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: _keyboardType,
+                        textInputAction: TextInputAction.done,
+                        autofillHints: const [
+                          AutofillHints.telephoneNumber,
+                          AutofillHints.email,
+                        ],
                         decoration: InputDecoration(
                           hintText: l10n.phoneOrEmailHint,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                           ),
-                          prefixIcon: const Icon(Icons.person_outline),
+                          prefixIcon: Icon(_identifierIcon),
                         ),
-                        onChanged: (_) => setState(() {}),
+                        onChanged: (_) =>
+                            setState(() => _errorMessage = null),
+                        onSubmitted: (_) {
+                          if (_isValidIdentifier && !_isSubmitting) {
+                            _onSendOtp();
+                          }
+                        },
                       ),
-                      const SizedBox(height: 14),
-                      TextField(
-                        controller: _referralCodeController,
-                        textCapitalization: TextCapitalization.characters,
-                        decoration: InputDecoration(
-                          hintText: l10n.referralCodeHint,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(18),
+                      if (_errorMessage != null) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          _errorMessage!,
+                          style: const TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 13,
                           ),
-                          prefixIcon: const Icon(Icons.card_giftcard_outlined),
+                        ),
+                      ],
+                      const SizedBox(height: 10),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton.icon(
+                          onPressed: () => setState(
+                            () => _showReferralField = !_showReferralField,
+                          ),
+                          icon: Icon(
+                            _showReferralField
+                                ? Icons.expand_less
+                                : Icons.card_giftcard_outlined,
+                            size: 18,
+                          ),
+                          label: Text(l10n.haveReferralCode),
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            minimumSize: Size.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
                         ),
                       ),
+                      if (_showReferralField) ...[
+                        const SizedBox(height: 8),
+                        TextField(
+                          controller: _referralCodeController,
+                          textCapitalization: TextCapitalization.characters,
+                          decoration: InputDecoration(
+                            hintText: l10n.referralCodeHint,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.card_giftcard_outlined,
+                            ),
+                          ),
+                        ),
+                      ],
                       const SizedBox(height: 20),
                       FilledButton(
                         onPressed: _isValidIdentifier && !_isSubmitting
@@ -250,17 +329,6 @@ class _LoginPageState extends State<LoginPage> {
                               )
                             : Text(l10n.sendOtpButton),
                       ),
-                      if (_errorMessage != null) ...[
-                        const SizedBox(height: 8),
-                        Text(
-                          _errorMessage!,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ],
                     ],
                   ),
                 ),

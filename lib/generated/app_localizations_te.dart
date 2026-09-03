@@ -117,6 +117,9 @@ class STe extends S {
   String get referralCodeHint => 'రిఫరల్ కోడ్ (ఐచ్ఛికం)';
 
   @override
+  String get haveReferralCode => 'మీ వద్ద రిఫరల్ కోడ్ ఉందా?';
+
+  @override
   String get myReferralCode => 'మీ రిఫరల్ కోడ్';
 
   @override
