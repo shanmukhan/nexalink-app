@@ -36,7 +36,7 @@ Sections:
 - Wallet usage
 - Estimated cashback
 
-**Current implementation:** done, backed by `nexalink-api`'s `/api/v1/cart` (a DRAFT order — there's no separate cart table server-side). Add/quantity changes/removal all round-trip to the backend. Coupon code `NEXA100` (₹100 off) is local/cosmetic only — no coupon module on the backend. "Use wallet balance" shows the real ledger balance (`GET /wallet`) and is genuinely honored at checkout in the all-or-nothing case (see Checkout below); if the balance only partially covers the order, the deduction shown is an estimate only.
+**Current implementation:** done, backed by `nexalink-api`'s `/api/v1/cart` (a DRAFT order — there's no separate cart table server-side). Add/quantity changes/removal all round-trip to the backend. Coupon code is real: `GET /api/v1/coupons/validate` previews the discount in the cart (no redemption recorded), and the same code is sent through on checkout, where the backend re-validates it unconditionally and applies the discount to the actual charged amount — see `nexalink-api`'s `coupon` module and Phase 6 of `11_Pending_Work_Plan.md`. Assumption (undocumented elsewhere): one redemption per customer per coupon. "Use wallet balance" shows the real ledger balance (`GET /wallet`) and is genuinely honored at checkout in the all-or-nothing case (see Checkout below); if the balance only partially covers the order, the deduction shown is an estimate only.
 
 ## Checkout
 - Address

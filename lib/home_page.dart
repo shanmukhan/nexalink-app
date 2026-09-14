@@ -7,6 +7,8 @@ import 'product_page.dart';
 import 'profile_page.dart';
 import 'referral_service.dart';
 import 'teams_page.dart';
+import 'wallet_page.dart';
+import 'wallet_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -64,8 +66,10 @@ class HomeDashboard extends StatefulWidget {
 class _HomeDashboardState extends State<HomeDashboard> {
   final _orderService = OrderService();
   final _referralService = ReferralService();
+  final _walletService = WalletService();
   int? _orderCount;
   int? _teamCount;
+  EarningsSummary? _earningsSummary;
 
   @override
   void initState() {
@@ -77,49 +81,59 @@ class _HomeDashboardState extends State<HomeDashboard> {
     try {
       final orderCount = await _orderService.countOrders();
       final ReferralSummary summary = await _referralService.getMySummary();
+      final EarningsSummary earnings = await _walletService.getEarningsSummary();
       if (!mounted) return;
       setState(() {
         _orderCount = orderCount;
         _teamCount = summary.referredCount;
+        _earningsSummary = earnings;
       });
     } catch (_) {
       // best-effort dashboard stats; leave placeholders on failure
     }
   }
 
-  Widget _buildInfoCard({required IconData icon, required String title, required String value, Color? color}) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withAlpha(8),
-              blurRadius: 14,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: (color ?? Colors.indigo).withAlpha(31),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Icon(icon, color: color ?? Colors.indigo, size: 22),
-            ),
-            const SizedBox(height: 18),
-            Text(title, style: const TextStyle(fontSize: 12, color: Colors.black54)),
-            const SizedBox(height: 8),
-            Text(value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          ],
-        ),
+  Widget _buildInfoCard({required IconData icon, required String title, required String value, Color? color, VoidCallback? onTap}) {
+    final card = Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withAlpha(8),
+            blurRadius: 14,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: (color ?? Colors.indigo).withAlpha(31),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(icon, color: color ?? Colors.indigo, size: 22),
+          ),
+          const SizedBox(height: 18),
+          Text(title, style: const TextStyle(fontSize: 12, color: Colors.black54)),
+          const SizedBox(height: 8),
+          Text(value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+
+    return Expanded(
+      child: onTap == null
+          ? card
+          : Material(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+              child: InkWell(borderRadius: BorderRadius.circular(20), onTap: onTap, child: card),
+            ),
     );
   }
 
@@ -156,6 +170,10 @@ class _HomeDashboardState extends State<HomeDashboard> {
     final walletBalance = CartProvider.of(context).walletBalance;
     final orderCountLabel = _orderCount?.toString() ?? '—';
     final teamCountLabel = _teamCount?.toString() ?? '—';
+    final earnings = _earningsSummary;
+    final totalEarningsLabel = earnings == null ? '—' : '₹ ${earnings.totalEarnings.toStringAsFixed(2)}';
+    final thisMonthLabel = earnings == null ? '—' : '₹ ${earnings.thisMonth.toStringAsFixed(2)}';
+    final pendingPayoutLabel = earnings == null ? '—' : '₹ ${earnings.pendingPayout.toStringAsFixed(2)}';
 
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 14),
@@ -183,47 +201,55 @@ class _HomeDashboardState extends State<HomeDashboard> {
             ],
           ),
           const SizedBox(height: 20),
-          Container(
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [Color(0xFF5B46FF), Color(0xFF6D81FF)]),
+          Material(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(24),
+            child: InkWell(
               borderRadius: BorderRadius.circular(24),
-              boxShadow: [
-                BoxShadow(color: Colors.indigo.withAlpha(41), blurRadius: 25, offset: const Offset(0, 12)),
-              ],
-            ),
-            padding: const EdgeInsets.all(22),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletPage())),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(colors: [Color(0xFF5B46FF), Color(0xFF6D81FF)]),
+                  borderRadius: BorderRadius.circular(24),
+                  boxShadow: [
+                    BoxShadow(color: Colors.indigo.withAlpha(41), blurRadius: 25, offset: const Offset(0, 12)),
+                  ],
+                ),
+                padding: const EdgeInsets.all(22),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(l10n.totalWalletBalance, style: const TextStyle(color: Colors.white70, fontSize: 14)),
-                    FilledButton(
-                      onPressed: () {},
-                      style: FilledButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        surfaceTintColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                      ),
-                      child: Text(l10n.addMoney, style: const TextStyle(color: Colors.indigo)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(l10n.totalWalletBalance, style: const TextStyle(color: Colors.white70, fontSize: 14)),
+                        FilledButton(
+                          onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletPage())),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            surfaceTintColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                          ),
+                          child: Text(l10n.addMoney, style: const TextStyle(color: Colors.indigo)),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 18),
+                    Text('₹ ${walletBalance.toStringAsFixed(2)}', style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 18),
+                    Row(
+                      children: [
+                        Expanded(child: _buildMiniStat(l10n.totalEarnings, totalEarningsLabel)),
+                        const SizedBox(width: 12),
+                        Expanded(child: _buildMiniStat(l10n.thisMonth, thisMonthLabel)),
+                        const SizedBox(width: 12),
+                        Expanded(child: _buildMiniStat(l10n.pendingPayout, pendingPayoutLabel)),
+                      ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 18),
-                Text('₹ ${walletBalance.toStringAsFixed(2)}', style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 18),
-                Row(
-                  children: [
-                    Expanded(child: _buildMiniStat(l10n.totalEarnings, '₹ 45,680')),
-                    const SizedBox(width: 12),
-                    Expanded(child: _buildMiniStat(l10n.thisMonth, '₹ 8,750')),
-                    const SizedBox(width: 12),
-                    Expanded(child: _buildMiniStat(l10n.pendingPayout, '₹ 2,350')),
-                  ],
-                ),
-              ],
+              ),
             ),
           ),
           const SizedBox(height: 22),
@@ -237,7 +263,13 @@ class _HomeDashboardState extends State<HomeDashboard> {
           const SizedBox(height: 14),
           Row(
             children: [
-              _buildInfoCard(icon: Icons.account_balance_wallet_outlined, title: l10n.walletLabel, value: '₹ ${walletBalance.toStringAsFixed(2)}', color: Colors.teal),
+              _buildInfoCard(
+                icon: Icons.account_balance_wallet_outlined,
+                title: l10n.walletLabel,
+                value: '₹ ${walletBalance.toStringAsFixed(2)}',
+                color: Colors.teal,
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletPage())),
+              ),
               const SizedBox(width: 12),
               _buildInfoCard(icon: Icons.card_giftcard_outlined, title: l10n.rewards, value: '33', color: Colors.orange),
             ],

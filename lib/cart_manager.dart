@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'api_client.dart';
 import 'api_models.dart';
+import 'coupon_service.dart';
 import 'order_service.dart';
 import 'wallet_service.dart';
 
 /// Cart state backed by nexalink-api's `/api/v1/cart` (a DRAFT `orders` row —
 /// see order_service.dart) plus the real wallet balance from `/api/v1/wallet`
-/// (see wallet_service.dart). Coupon code stays local/cosmetic: the backend has
-/// no coupon module (only wallet + referral shipped in M3), so it doesn't affect
-/// the amount actually charged at checkout — only the on-screen estimate.
+/// (see wallet_service.dart). Coupon validation now round-trips to
+/// `/api/v1/coupons/validate` (see coupon_service.dart) for the on-screen
+/// preview, and the same code is sent through on `/orders/checkout` — the
+/// backend re-validates it there unconditionally and that's what actually
+/// reduces the amount charged (see nexalink-api's
+/// coupon.application.CouponService and order.application.OrderService#checkout).
 ///
 /// "Use wallet balance" is real, but only in the all-or-nothing case: if the
 /// wallet fully covers the order subtotal, checkout pays with the WALLET
@@ -18,17 +23,19 @@ import 'wallet_service.dart';
 /// balance that only partially covers the order just shows the estimate.
 class CartNotifier extends ChangeNotifier {
   static const double cashbackRate = 0.02;
-  static const String validCoupon = 'NEXA100';
-  static const double couponDiscount = 100.0;
 
   final OrderService _orderService = OrderService();
   final WalletService _walletService = WalletService();
+  final CouponService _couponService = CouponService();
 
   OrderDto? _order;
   double walletBalance = 0.0;
   bool isLoading = false;
   String? loadError;
   String? appliedCoupon;
+  double _appliedCouponDiscount = 0.0;
+  bool isApplyingCoupon = false;
+  String? couponError;
   bool useWallet = false;
 
   OrderDto? get order => _order;
@@ -37,7 +44,10 @@ class CartNotifier extends ChangeNotifier {
 
   double get subtotal => _order?.totalAmount ?? 0.0;
 
-  double get discount => appliedCoupon == validCoupon ? couponDiscount : 0.0;
+  /// Discount from the last successful [applyCoupon] preview. Not a client-side
+  /// computation; the backend is the source of truth for both the preview and
+  /// the re-validated amount actually applied at checkout.
+  double get discount => appliedCoupon != null ? _appliedCouponDiscount : 0.0;
 
   double get walletDeduction {
     if (!useWallet) return 0.0;
@@ -104,12 +114,38 @@ class CartNotifier extends ChangeNotifier {
     }
   }
 
-  bool applyCoupon(String code) {
-    final trimmed = code.trim().toUpperCase();
-    final valid = trimmed == validCoupon;
-    appliedCoupon = valid ? trimmed : null;
+  /// Validates the coupon against `/api/v1/coupons/validate` (a preview only —
+  /// no redemption is recorded server-side; see coupon_service.dart) and, on
+  /// success, stores the server-computed discount for [discount]/[total] to use.
+  /// Returns true on success; on failure, [appliedCoupon] is cleared and
+  /// [couponError] carries a message the UI can show.
+  Future<bool> applyCoupon(String code) async {
+    final trimmed = code.trim();
+    if (trimmed.isEmpty) return false;
+    isApplyingCoupon = true;
+    couponError = null;
     notifyListeners();
-    return valid;
+    try {
+      final result = await _couponService.validate(code: trimmed, orderTotal: subtotal);
+      appliedCoupon = result.code;
+      _appliedCouponDiscount = result.discountAmount;
+      return true;
+    } on ApiException catch (e) {
+      appliedCoupon = null;
+      _appliedCouponDiscount = 0.0;
+      couponError = e.message;
+      return false;
+    } finally {
+      isApplyingCoupon = false;
+      notifyListeners();
+    }
+  }
+
+  void removeCoupon() {
+    appliedCoupon = null;
+    _appliedCouponDiscount = 0.0;
+    couponError = null;
+    notifyListeners();
   }
 
   void setUseWallet(bool value) {
@@ -120,6 +156,8 @@ class CartNotifier extends ChangeNotifier {
   void clear() {
     _order = null;
     appliedCoupon = null;
+    _appliedCouponDiscount = 0.0;
+    couponError = null;
     useWallet = false;
     notifyListeners();
   }

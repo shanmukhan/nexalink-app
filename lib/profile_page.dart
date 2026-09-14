@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'auth_service.dart';
 import 'generated/app_localizations.dart';
 import 'login_page.dart';
+import 'wallet_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
-  Widget _buildOptionTile({required IconData icon, required String title, String? subtitle}) {
-    return Container(
+  Widget _buildOptionTile({required IconData icon, required String title, String? subtitle, VoidCallback? onTap}) {
+    final tile = Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
@@ -47,6 +48,13 @@ class ProfilePage extends StatelessWidget {
           const Icon(Icons.chevron_right, color: Colors.black26),
         ],
       ),
+    );
+
+    if (onTap == null) return tile;
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(18),
+      child: InkWell(borderRadius: BorderRadius.circular(18), onTap: onTap, child: tile),
     );
   }
 
@@ -127,6 +135,11 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 20),
               _buildOptionTile(icon: Icons.badge_outlined, title: l10n.personalInformation),
               _buildOptionTile(icon: Icons.verified_user_outlined, title: l10n.kycVerification, subtitle: l10n.verified),
+              _buildOptionTile(
+                icon: Icons.account_balance_wallet_outlined,
+                title: l10n.walletPageTitle,
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletPage())),
+              ),
               _buildOptionTile(icon: Icons.account_balance_outlined, title: l10n.bankDetails),
               _buildOptionTile(icon: Icons.lock_outline, title: l10n.changePassword),
               _buildOptionTile(icon: Icons.bookmark_border, title: l10n.addressBook),

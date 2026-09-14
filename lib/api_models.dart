@@ -84,6 +84,8 @@ class OrderDto {
   final String? paymentMethod;
   final String? trackingNumber;
   final String? invoiceNumber;
+  final String? couponCode;
+  final double discountAmount;
 
   OrderDto({
     required this.id,
@@ -94,6 +96,8 @@ class OrderDto {
     this.paymentMethod,
     this.trackingNumber,
     this.invoiceNumber,
+    this.couponCode,
+    this.discountAmount = 0.0,
   });
 
   factory OrderDto.fromJson(Map<String, dynamic> json) => OrderDto(
@@ -105,6 +109,35 @@ class OrderDto {
         paymentMethod: json['paymentMethod'] as String?,
         trackingNumber: json['trackingNumber'] as String?,
         invoiceNumber: json['invoiceNumber'] as String?,
+        couponCode: json['couponCode'] as String?,
+        discountAmount: double.parse((json['discountAmount'] ?? 0).toString()),
+      );
+}
+
+/// Cart-preview response from `GET /api/v1/coupons/validate` (see
+/// coupon.api.CouponController / coupon.api.dto.CouponValidateResponse). Doesn't
+/// record a redemption — the coupon is re-validated for real at checkout.
+class CouponValidation {
+  final String code;
+  final String discountType;
+  final double discountValue;
+  final double discountAmount;
+  final double finalTotal;
+
+  CouponValidation({
+    required this.code,
+    required this.discountType,
+    required this.discountValue,
+    required this.discountAmount,
+    required this.finalTotal,
+  });
+
+  factory CouponValidation.fromJson(Map<String, dynamic> json) => CouponValidation(
+        code: json['code'] as String,
+        discountType: json['discountType'] as String,
+        discountValue: double.parse((json['discountValue'] ?? 0).toString()),
+        discountAmount: double.parse((json['discountAmount'] ?? 0).toString()),
+        finalTotal: double.parse((json['finalTotal'] ?? 0).toString()),
       );
 }
 
@@ -152,6 +185,26 @@ class WalletBalance {
   factory WalletBalance.fromJson(Map<String, dynamic> json) => WalletBalance(
         balance: double.parse(json['balance'].toString()),
         currency: json['currency'] as String? ?? 'INR',
+      );
+}
+
+/// Home-screen earnings mini-stats (see nexalink-api's
+/// reporting.api.dto.EarningsSummaryResponse).
+class EarningsSummary {
+  final double totalEarnings;
+  final double thisMonth;
+  final double pendingPayout;
+
+  EarningsSummary({
+    required this.totalEarnings,
+    required this.thisMonth,
+    required this.pendingPayout,
+  });
+
+  factory EarningsSummary.fromJson(Map<String, dynamic> json) => EarningsSummary(
+        totalEarnings: double.parse((json['totalEarnings'] ?? 0).toString()),
+        thisMonth: double.parse((json['thisMonth'] ?? 0).toString()),
+        pendingPayout: double.parse((json['pendingPayout'] ?? 0).toString()),
       );
 }
 

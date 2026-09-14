@@ -116,6 +116,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         shippingAddressId: address.id,
         paymentMethod: paymentMethod,
         idempotencyKey: idempotencyKey,
+        couponCode: cart.appliedCoupon,
       );
       final paid = await _orderService.pay(checkedOut.id);
       if (!mounted) return;

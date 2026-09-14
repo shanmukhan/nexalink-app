@@ -29,10 +29,15 @@ class OrderService {
     required String shippingAddressId,
     required String paymentMethod,
     required String idempotencyKey,
+    String? couponCode,
   }) =>
       _client.post(
         '/orders/checkout',
-        {'shippingAddressId': shippingAddressId, 'paymentMethod': paymentMethod},
+        {
+          'shippingAddressId': shippingAddressId,
+          'paymentMethod': paymentMethod,
+          if (couponCode != null && couponCode.isNotEmpty) 'couponCode': couponCode,
+        },
         (json) => OrderDto.fromJson(json as Map<String, dynamic>),
         extraHeaders: {'Idempotency-Key': idempotencyKey},
       );

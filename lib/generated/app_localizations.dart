@@ -1026,6 +1026,126 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Back to Home'**
   String get backToHome;
+
+  /// No description provided for @walletPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Wallet'**
+  String get walletPageTitle;
+
+  /// No description provided for @currentBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Balance'**
+  String get currentBalance;
+
+  /// No description provided for @requestWithdrawal.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Withdrawal'**
+  String get requestWithdrawal;
+
+  /// No description provided for @transactionHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction History'**
+  String get transactionHistory;
+
+  /// No description provided for @noTransactionsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No transactions yet'**
+  String get noTransactionsYet;
+
+  /// No description provided for @loadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load More'**
+  String get loadMore;
+
+  /// No description provided for @withdrawalAmountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get withdrawalAmountLabel;
+
+  /// No description provided for @withdrawalAmountHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter amount to withdraw'**
+  String get withdrawalAmountHint;
+
+  /// No description provided for @withdrawalDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Withdrawal'**
+  String get withdrawalDialogTitle;
+
+  /// No description provided for @withdrawalDialogSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Available balance: {amount}'**
+  String withdrawalDialogSubtitle(String amount);
+
+  /// No description provided for @withdrawalAmountRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an amount'**
+  String get withdrawalAmountRequired;
+
+  /// No description provided for @withdrawalAmountInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid amount'**
+  String get withdrawalAmountInvalid;
+
+  /// No description provided for @withdrawalAmountExceedsBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount exceeds your available balance'**
+  String get withdrawalAmountExceedsBalance;
+
+  /// No description provided for @withdrawalSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdrawal request submitted'**
+  String get withdrawalSubmitted;
+
+  /// No description provided for @withdrawalFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not submit withdrawal request. Please try again.'**
+  String get withdrawalFailed;
+
+  /// No description provided for @submitButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submitButton;
+
+  /// No description provided for @cancelButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancelButton;
+
+  /// No description provided for @walletLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load wallet details. Please try again.'**
+  String get walletLoadFailed;
+
+  /// No description provided for @transactionTypeCredit.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit'**
+  String get transactionTypeCredit;
+
+  /// No description provided for @transactionTypeDebit.
+  ///
+  /// In en, this message translates to:
+  /// **'Debit'**
+  String get transactionTypeDebit;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

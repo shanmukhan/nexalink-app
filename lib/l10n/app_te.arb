@@ -185,5 +185,32 @@
   "statusShipped": "పంపబడింది",
   "statusDelivered": "డెలివరీ చేయబడింది",
   "continueShopping": "షాపింగ్ కొనసాగించండి",
-  "backToHome": "హోమ్‌కు తిరిగి వెళ్లండి"
+  "backToHome": "హోమ్‌కు తిరిగి వెళ్లండి",
+  "walletPageTitle": "నా వాలెట్",
+  "currentBalance": "ప్రస్తుత బ్యాలెన్స్",
+  "requestWithdrawal": "విత్‌డ్రాయల్ అభ్యర్థించండి",
+  "transactionHistory": "లావాదేవీల చరిత్ర",
+  "noTransactionsYet": "ఇంకా లావాదేవీలు లేవు",
+  "loadMore": "మరిన్ని లోడ్ చేయండి",
+  "withdrawalAmountLabel": "మొత్తం",
+  "withdrawalAmountHint": "విత్‌డ్రా చేయాల్సిన మొత్తాన్ని నమోదు చేయండి",
+  "withdrawalDialogTitle": "విత్‌డ్రాయల్ అభ్యర్థించండి",
+  "withdrawalDialogSubtitle": "అందుబాటులో ఉన్న బ్యాలెన్స్: {amount}",
+  "@withdrawalDialogSubtitle": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "withdrawalAmountRequired": "మొత్తాన్ని నమోదు చేయండి",
+  "withdrawalAmountInvalid": "సరైన మొత్తాన్ని నమోదు చేయండి",
+  "withdrawalAmountExceedsBalance": "మొత్తం మీ అందుబాటులో ఉన్న బ్యాలెన్స్‌ను మించిపోయింది",
+  "withdrawalSubmitted": "విత్‌డ్రాయల్ అభ్యర్థన సమర్పించబడింది",
+  "withdrawalFailed": "విత్‌డ్రాయల్ అభ్యర్థనను సమర్పించలేకపోయాము. మళ్లీ ప్రయత్నించండి.",
+  "submitButton": "సమర్పించండి",
+  "cancelButton": "రద్దు చేయండి",
+  "walletLoadFailed": "వాలెట్ వివరాలను లోడ్ చేయలేకపోయాము. మళ్లీ ప్రయత్నించండి.",
+  "transactionTypeCredit": "క్రెడిట్",
+  "transactionTypeDebit": "డెబిట్"
 }

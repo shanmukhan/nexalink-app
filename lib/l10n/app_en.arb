@@ -185,5 +185,32 @@
   "statusShipped": "Shipped",
   "statusDelivered": "Delivered",
   "continueShopping": "Continue Shopping",
-  "backToHome": "Back to Home"
+  "backToHome": "Back to Home",
+  "walletPageTitle": "My Wallet",
+  "currentBalance": "Current Balance",
+  "requestWithdrawal": "Request Withdrawal",
+  "transactionHistory": "Transaction History",
+  "noTransactionsYet": "No transactions yet",
+  "loadMore": "Load More",
+  "withdrawalAmountLabel": "Amount",
+  "withdrawalAmountHint": "Enter amount to withdraw",
+  "withdrawalDialogTitle": "Request Withdrawal",
+  "withdrawalDialogSubtitle": "Available balance: {amount}",
+  "@withdrawalDialogSubtitle": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "withdrawalAmountRequired": "Enter an amount",
+  "withdrawalAmountInvalid": "Enter a valid amount",
+  "withdrawalAmountExceedsBalance": "Amount exceeds your available balance",
+  "withdrawalSubmitted": "Withdrawal request submitted",
+  "withdrawalFailed": "Could not submit withdrawal request. Please try again.",
+  "submitButton": "Submit",
+  "cancelButton": "Cancel",
+  "walletLoadFailed": "Could not load wallet details. Please try again.",
+  "transactionTypeCredit": "Credit",
+  "transactionTypeDebit": "Debit"
 }

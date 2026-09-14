@@ -152,6 +152,7 @@ class _CartPageState extends State<CartPage> {
                             Expanded(
                               child: TextField(
                                 controller: _couponController,
+                                enabled: !cart.isApplyingCoupon,
                                 textCapitalization: TextCapitalization.characters,
                                 decoration: InputDecoration(
                                   hintText: l10n.couponCodeHint,
@@ -167,16 +168,37 @@ class _CartPageState extends State<CartPage> {
                                 padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 18),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                               ),
-                              onPressed: () {
-                                final applied = cart.applyCoupon(_couponController.text);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(applied ? l10n.couponApplied : l10n.invalidCoupon)),
-                                );
-                              },
-                              child: Text(l10n.applyCoupon),
+                              onPressed: cart.isApplyingCoupon
+                                  ? null
+                                  : () async {
+                                      final applied = await cart.applyCoupon(_couponController.text);
+                                      if (!context.mounted) return;
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text(applied ? l10n.couponApplied : (cart.couponError ?? l10n.invalidCoupon))),
+                                      );
+                                    },
+                              child: cart.isApplyingCoupon
+                                  ? const SizedBox(
+                                      width: 18,
+                                      height: 18,
+                                      child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                                    )
+                                  : Text(l10n.applyCoupon),
                             ),
                           ],
                         ),
+                        if (cart.appliedCoupon != null) ...[
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Icon(Icons.check_circle, size: 16, color: Colors.green),
+                              const SizedBox(width: 6),
+                              Text('${cart.appliedCoupon} — ${l10n.couponApplied}', style: const TextStyle(color: Colors.green, fontSize: 12)),
+                              const Spacer(),
+                              TextButton(onPressed: cart.removeCoupon, child: const Icon(Icons.close, size: 16)),
+                            ],
+                          ),
+                        ],
                       ],
                     ),
                   ),

@@ -490,4 +490,69 @@ class SEn extends S {
 
   @override
   String get backToHome => 'Back to Home';
+
+  @override
+  String get walletPageTitle => 'My Wallet';
+
+  @override
+  String get currentBalance => 'Current Balance';
+
+  @override
+  String get requestWithdrawal => 'Request Withdrawal';
+
+  @override
+  String get transactionHistory => 'Transaction History';
+
+  @override
+  String get noTransactionsYet => 'No transactions yet';
+
+  @override
+  String get loadMore => 'Load More';
+
+  @override
+  String get withdrawalAmountLabel => 'Amount';
+
+  @override
+  String get withdrawalAmountHint => 'Enter amount to withdraw';
+
+  @override
+  String get withdrawalDialogTitle => 'Request Withdrawal';
+
+  @override
+  String withdrawalDialogSubtitle(String amount) {
+    return 'Available balance: $amount';
+  }
+
+  @override
+  String get withdrawalAmountRequired => 'Enter an amount';
+
+  @override
+  String get withdrawalAmountInvalid => 'Enter a valid amount';
+
+  @override
+  String get withdrawalAmountExceedsBalance =>
+      'Amount exceeds your available balance';
+
+  @override
+  String get withdrawalSubmitted => 'Withdrawal request submitted';
+
+  @override
+  String get withdrawalFailed =>
+      'Could not submit withdrawal request. Please try again.';
+
+  @override
+  String get submitButton => 'Submit';
+
+  @override
+  String get cancelButton => 'Cancel';
+
+  @override
+  String get walletLoadFailed =>
+      'Could not load wallet details. Please try again.';
+
+  @override
+  String get transactionTypeCredit => 'Credit';
+
+  @override
+  String get transactionTypeDebit => 'Debit';
 }

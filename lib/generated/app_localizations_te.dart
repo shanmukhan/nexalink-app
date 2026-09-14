@@ -495,4 +495,70 @@ class STe extends S {
 
   @override
   String get backToHome => 'హోమ్‌కు తిరిగి వెళ్లండి';
+
+  @override
+  String get walletPageTitle => 'నా వాలెట్';
+
+  @override
+  String get currentBalance => 'ప్రస్తుత బ్యాలెన్స్';
+
+  @override
+  String get requestWithdrawal => 'విత్‌డ్రాయల్ అభ్యర్థించండి';
+
+  @override
+  String get transactionHistory => 'లావాదేవీల చరిత్ర';
+
+  @override
+  String get noTransactionsYet => 'ఇంకా లావాదేవీలు లేవు';
+
+  @override
+  String get loadMore => 'మరిన్ని లోడ్ చేయండి';
+
+  @override
+  String get withdrawalAmountLabel => 'మొత్తం';
+
+  @override
+  String get withdrawalAmountHint =>
+      'విత్‌డ్రా చేయాల్సిన మొత్తాన్ని నమోదు చేయండి';
+
+  @override
+  String get withdrawalDialogTitle => 'విత్‌డ్రాయల్ అభ్యర్థించండి';
+
+  @override
+  String withdrawalDialogSubtitle(String amount) {
+    return 'అందుబాటులో ఉన్న బ్యాలెన్స్: $amount';
+  }
+
+  @override
+  String get withdrawalAmountRequired => 'మొత్తాన్ని నమోదు చేయండి';
+
+  @override
+  String get withdrawalAmountInvalid => 'సరైన మొత్తాన్ని నమోదు చేయండి';
+
+  @override
+  String get withdrawalAmountExceedsBalance =>
+      'మొత్తం మీ అందుబాటులో ఉన్న బ్యాలెన్స్‌ను మించిపోయింది';
+
+  @override
+  String get withdrawalSubmitted => 'విత్‌డ్రాయల్ అభ్యర్థన సమర్పించబడింది';
+
+  @override
+  String get withdrawalFailed =>
+      'విత్‌డ్రాయల్ అభ్యర్థనను సమర్పించలేకపోయాము. మళ్లీ ప్రయత్నించండి.';
+
+  @override
+  String get submitButton => 'సమర్పించండి';
+
+  @override
+  String get cancelButton => 'రద్దు చేయండి';
+
+  @override
+  String get walletLoadFailed =>
+      'వాలెట్ వివరాలను లోడ్ చేయలేకపోయాము. మళ్లీ ప్రయత్నించండి.';
+
+  @override
+  String get transactionTypeCredit => 'క్రెడిట్';
+
+  @override
+  String get transactionTypeDebit => 'డెబిట్';
 }
